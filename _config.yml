@@ -1,4 +1,4 @@
 # CHANGEME: Set these variable to your liking
-title: ESPHome Project Template
-description: Powered by ESPHome and ESP Web Tools
+title: Tür- und Fenstersensor
+description: IoT Tür- und Fenstersensor. Smarthome-Anbindung via ESPHome / MQTT.
 theme: jekyll-theme-slate
