@@ -1,6 +1,6 @@
 # These substitutions allow the end user to override certain values
 substitutions:
-  name: "project-template"
+  name: "fenster-sensor"
 
 esphome:
   name: "${name}"
@@ -11,7 +11,7 @@ esphome:
   # This will allow for (future) project identification,
   # configuration and updates.
   project:
-    name: esphome.project-template
+    name: neoe.fenster-sensor
     version: "1.0"
 
 esp8266:
@@ -50,3 +50,30 @@ captive_portal:
 # Sets up the improv via serial client for Wi-Fi provisioning.
 # Handy if your device has a usb port for the user to add credentials when they first get it.
 improv_serial:
+
+
+# NEOE specific additions
+switch:
+  - platform: gpio
+    pin: D4
+    id: status_led
+
+binary_sensor:
+  - platform: gpio
+    name: "Fenster Wohnzimmer"
+    id: fenster_wohnzimmer
+    device_class: window
+    pin:
+      number: D5
+      mode:
+        input: true
+        pullup: true
+    on_state:
+      then:
+        - if:
+            condition:
+              binary_sensor.is_on: fenster_wohnzimmer
+            then:
+              - switch.turn_on: status_led
+            else:
+              - switch.turn_off: status_led
